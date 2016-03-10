@@ -451,7 +451,7 @@ static NSString* toBase64(NSData* data) {
                     if (error) {
                         resultToReturn = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsString:[error localizedDescription]];
                     } else {
-                        NSString* nativeUri = [[self urlTransformer:assetURL] absoluSCUIImagePickerring];
+                        NSString* nativeUri = [[self urlTransformer:assetURL] absoluteString];
                         resultToReturn = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nativeUri];
                     }
                     completion(resultToReturn);

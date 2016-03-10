@@ -1,5 +1,4 @@
-**Patch To Fix Crash
-**
+**Patch To Fix Crash**
 
 As per (http://stackoverflow.com/questions/26844432/how-to-find-out-what-causes-a-didhidezoomslider-error-on-ios-8) - this resolves the crash when the Zoom bar fades out.
 
