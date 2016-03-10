@@ -22,6 +22,46 @@
 #import <CoreLocation/CLLocationManager.h>
 #import <Cordova/CDVPlugin.h>
 
+#import <UIKit/UIKit.h>
+
+@interface SCUIImagePicker : UIImagePickerController
+
+@end
+
+@interface SCUIImagePicker ()
+
+@end
+
+@implementation SCUIImagePicker
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self clearZoomSliderDelegateForClass:[self sliderClass] subviews:self.view.subviews];
+}
+
+- (void)clearZoomSliderDelegateForClass:(Class)sliderClass subviews:(NSArray *)subviews {
+    for (UIView *subview in subviews) {
+        if ([subview isKindOfClass:sliderClass] && [subview respondsToSelector:@selector(setDelegate:)]) {
+            [subview performSelector:@selector(setDelegate:) withObject:nil];
+            return;
+        }
+        else {
+            [self clearZoomSliderDelegateForClass:sliderClass subviews:subview.subviews];
+        }
+    }
+}
+
+- (Class)sliderClass {
+    for (NSString* prefix in @[@"CAM", @"CMK"]) {
+        Class zoomClass = NSClassFromString([prefix stringByAppendingString:@"ZoomSlider"]);
+        if (zoomClass != Nil) {
+            return zoomClass;
+        }
+    }
+    return Nil;
+}
+@end
+
 enum CDVDestinationType {
     DestinationTypeDataUrl = 0,
     DestinationTypeFileUri,
@@ -64,7 +104,7 @@ typedef NSUInteger CDVMediaType;
 
 @end
 
-@interface CDVCameraPicker : UIImagePickerController
+@interface CDVCameraPicker : SCUIImagePicker
 
 @property (strong) CDVPictureOptions* pictureOptions;
 
@@ -105,9 +145,9 @@ typedef NSUInteger CDVMediaType;
 - (void)cleanup:(CDVInvokedUrlCommand*)command;
 - (void)repositionPopover:(CDVInvokedUrlCommand*)command;
 
-- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info;
-- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingImage:(UIImage*)image editingInfo:(NSDictionary*)editingInfo;
-- (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker;
+- (void)imagePickerController:(SCUIImagePicker*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info;
+- (void)imagePickerController:(SCUIImagePicker*)picker didFinishPickingImage:(UIImage*)image editingInfo:(NSDictionary*)editingInfo;
+- (void)imagePickerControllerDidCancel:(SCUIImagePicker*)picker;
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation;
