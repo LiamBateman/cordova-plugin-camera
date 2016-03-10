@@ -1,3 +1,9 @@
+**Patch To Fix Crash
+**
+
+As per (http://stackoverflow.com/questions/26844432/how-to-find-out-what-causes-a-didhidezoomslider-error-on-ios-8) - this resolves the crash when the Zoom bar fades out.
+
+
 <!---
 # license: Licensed to the Apache Software Foundation (ASF) under one
 #         or more contributor license agreements.  See the NOTICE file
@@ -294,11 +300,11 @@ Matches iOS UIPopoverArrowDirection constants to specify arrow location on popov
 
 | Name | Type | Default |
 | --- | --- | --- |
-| ARROW_UP | <code>number</code> | <code>1</code> | 
-| ARROW_DOWN | <code>number</code> | <code>2</code> | 
-| ARROW_LEFT | <code>number</code> | <code>4</code> | 
-| ARROW_RIGHT | <code>number</code> | <code>8</code> | 
-| ARROW_ANY | <code>number</code> | <code>15</code> | 
+| ARROW_UP | <code>number</code> | <code>1</code> |
+| ARROW_DOWN | <code>number</code> | <code>2</code> |
+| ARROW_LEFT | <code>number</code> | <code>4</code> |
+| ARROW_RIGHT | <code>number</code> | <code>8</code> |
+| ARROW_ANY | <code>number</code> | <code>15</code> |
 
 <a name="module_Camera.Direction"></a>
 ### Camera.Direction : <code>enum</code>
